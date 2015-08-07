@@ -208,10 +208,10 @@ Additional configuration are created in /etc/nginx/conf.d/
 6) Example to use this role with my ssl-certs role to generate or copie ssl certificate ( https://galaxy.ansible.com/list#/roles/3115 )
 ```yaml
  - hosts: all
-   roles: 
+   roles:
      - jdauphant.ssl-certs
      - role: jdauphant.nginx
-       nginx_configs: 
+       nginx_configs:
           ssl:
                - ssl_certificate_key {{ssl_certs_privkey_path}}
                - ssl_certificate     {{ssl_certs_cert_path}}
