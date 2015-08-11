@@ -21,6 +21,16 @@
   when: ansible_os_family == "RedHat" and not nginx_is_el|bool
   tags: [packages,nginx]
 
+# nginx will fail to upgrade if nginx-core or nginx-common are installed
+- name: Remove old nginx packages
+  apt:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+    - nginx-core
+    - nginx-common
+  when: ansible_os_family == "Debian" and nginx_official_repo|bool and nginx_apt_repo_added.changed
+
 - name: Install the nginx packages
   apt: name={{ item }} state=present
   with_items: "{{ nginx_ubuntu_pkg }}"
