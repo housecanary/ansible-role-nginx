@@ -8,6 +8,7 @@
   apt_repository: repo="deb http://nginx.org/packages/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} nginx"
   tags: [packages,nginx]
   when: ansible_os_family == 'Debian'
+  register: nginx_apt_repo_added
 
 - name: Ensure RPM official nginx key
   rpm_key: key=http://nginx.org/keys/nginx_signing.key
