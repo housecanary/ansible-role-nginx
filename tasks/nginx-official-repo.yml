@@ -10,12 +10,14 @@
   environment: "{{ nginx_env }}"
   tags: [packages,nginx]
   when: ansible_os_family == 'Debian' and not nginx_official_repo_mainline
+  register: nginx_apt_repo_added
 
 - name: Ensure APT official nginx repository (mainline)
   apt_repository: repo="deb http://nginx.org/packages/mainline/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} nginx"
   environment: "{{ nginx_env }}"
   tags: [packages,nginx]
   when: ansible_os_family == 'Debian' and nginx_official_repo_mainline
+  register: nginx_apt_repo_added
 
 - name: Ensure RPM official nginx key
   rpm_key: key=http://nginx.org/keys/nginx_signing.key
