@@ -31,6 +31,16 @@
     - nginx-common
   when: ansible_os_family == "Debian" and nginx_official_repo|bool
 
+# apt-get remove will — for reasons unknown — systemd mask the nginx service.
+# The installation below does not unmask it, also for unknown reasons.
+# Here, we manually unmask it ourselves.
+- name: Remove systemd nginx masking
+  shell: |
+    if [ -h /etc/systemd/system/nginx.service ]; then
+      systemd unmask nginx.service
+    fi
+  when: ansible_os_family == "Debian"
+
 - name: Install the nginx packages
   apt: name={{ item }} state=present
   with_items: "{{ nginx_ubuntu_pkg }}"
