@@ -29,7 +29,7 @@
   with_items:
     - nginx-core
     - nginx-common
-  when: ansible_os_family == "Debian" and nginx_official_repo|bool and nginx_apt_repo_added.changed
+  when: ansible_os_family == "Debian" and nginx_official_repo|bool
 
 - name: Install the nginx packages
   apt: name={{ item }} state=present
