@@ -49,7 +49,7 @@ nginx_http_params:
 
 nginx_stream_params: []
 
-nginx_sites: []
+nginx_sites: {}
 nginx_remove_sites: []
 
 nginx_configs: {}
