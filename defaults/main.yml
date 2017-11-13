@@ -43,7 +43,9 @@ nginx_http_params:
   - tcp_nodelay "on"
   - keepalive_timeout "65"
   - access_log "{{nginx_log_dir}}/access.log"
+  - access_log syslog:server=unix:/dev/log,faility=local7,tag=nginx,severity=info main
   - "error_log {{nginx_log_dir}}/error.log {{nginx_error_log_level}}"
+  - error_log syslog:server=unix:/dev/log,faility=local7,tag=nginx,severity=error
   - server_tokens off
   - types_hash_max_size 2048
 
