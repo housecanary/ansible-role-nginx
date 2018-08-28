@@ -37,7 +37,7 @@
 - name: Remove systemd nginx masking
   shell: |
     if [ -h /etc/systemd/system/nginx.service ]; then
-      systemd unmask nginx.service
+      systemctl unmask nginx.service
     fi
   when: ansible_os_family == "Debian"
 
